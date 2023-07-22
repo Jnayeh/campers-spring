@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.HttpClientErrorException;
@@ -69,7 +70,7 @@ public class ActivityServiceImpl implements ActivityService {
         }
     }
 
-
+    @Scheduled(cron = "0 0 0 * * ?")
     public void updateActivityStatus() {
         List<Activity> activities = activityRepository.findAll();
         String currentSeason = getCurrentSeason();

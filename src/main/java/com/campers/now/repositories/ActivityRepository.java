@@ -16,9 +16,6 @@ public interface ActivityRepository extends JpaRepository<Activity, Integer> {
     @Query("SELECT  DISTINCT a FROM Activity a JOIN a.users u WHERE u.id = :userId and a.active= true and a.isFavorite=true ")
     List<Activity> findFavoritesActivitiesByUserId(@Param("userId") Integer userId);
 
-   /* @Query("SELECT DISTINCT a FROM Activity a RIGHT JOIN a.users u WHERE u.id <> :userId OR u.id IS NULL AND a.active = true")
-    List<Activity> findNotFavoritesActivitiesForUserId(@Param("userId") Integer userId);
-*/
 
     @Query("SELECT DISTINCT a FROM Activity a WHERE NOT EXISTS (SELECT u FROM a.users u WHERE u.id = :userId) AND a.active = true")
     List<Activity> findNotFavoritesActivitiesForUserId(@Param("userId") Integer userId);

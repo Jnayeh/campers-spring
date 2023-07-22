@@ -52,6 +52,13 @@ public class ActivityController {
         }
     }
 
+    @PostMapping("/update-activity-status")
+    public ResponseEntity<String> updateActivityStatusManually() {
+        activityService.updateActivityStatus();
+        return ResponseEntity.ok("Activity status update initiated.");
+    }
+
+
     @PutMapping("/{id}/{campId}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Activity update(@RequestBody Activity activity, @PathVariable("id") Integer id,@PathVariable("campId") Integer campId) {
